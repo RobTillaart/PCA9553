@@ -48,7 +48,7 @@ unittest_teardown()
 
 unittest(test_constants)
 {
-  intf(stderr, "\nregisters");
+  fprintf(stderr, "\nregisters");
   assertEqual(PCA9553_INPUT      , 0x00);
   assertEqual(PCA9553_PSC0       , 0x01);
   assertEqual(PCA9553_PWM0       , 0x02);
