@@ -32,7 +32,7 @@
 #include <ArduinoUnitTests.h>
 
 
-#include "PCA9635.h"
+#include "PCA9553.h"
 
 
 unittest_setup()
