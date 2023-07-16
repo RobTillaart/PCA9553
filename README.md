@@ -19,11 +19,15 @@ see table below.
 If you need to connect more PCA9553 devices to a single I2C bus you 
 need a I2C multiplexer like https://github.com/RobTillaart/TCA9548.
 
-There are two PWM generators 0 and 1, and one can set the duty cycle
-and the frequency by means of a pre-scaler. 
+The device has two PWM "generators", 0 and 1, and one can set the 
+duty cycle and the frequency by means of a pre-scaler. 
 
-Every output channel can select to which PWM generator it is connected,
-or if it is set to ON or OFF.
+Every output channel 0..3 can select to which PWM generator it is 
+connected, or if it is set to ON or OFF.
+
+The output channels can also be used as generic GPIO, however that
+is not implemented in the first release.
+
 
 #### From datasheet
 
@@ -82,10 +86,10 @@ Only the lower 4 bits are used.
 - **uint8_t getPrescaler1()** get set value.
 
 The main oscillator frequency can be divided by a pre-scaler.
-The period of BLINK = (PSC + 1) / 44.0
+The period of ```BLINK = (PSC + 1) / 44```
 This gives the output a blink range of 0.172 Hz to 44 Hz.
 
-Some "magic" prescalers
+Some "magic" pre-scalers.  (to be confirmed).
 
 |  psc  |  period  |  frequency  |
 |:-----:|:--------:|:-----------:|
@@ -109,12 +113,17 @@ Some "magic" prescalers
 - **void setPWM1(uint8_t pwm = 128)** set PWM0, default 128 == 50%.
 - **uint8_t getPWM1()** return set PWM.
 
-The duty cycle of BLINK0 = (256 - PWM0) / 256.
+The duty cycle of ```BLINK = (256 - PWM) / 256```
 
-0 ==> 0%
-255 ==> 100%
+|  pwm  |  duty cycle  |
+|:-----:|:------------:|
+|    0  }     0%       |
+|   64  |    25%       |
+|  128  |    50%       |
+|  192  |    75%       |
+|  255  |   100%       |
 
-Note: one might need a Gamma brightness correction - - https://github.com/RobTillaart/GAMMA
+Note: one might need a Gamma brightness correction - https://github.com/RobTillaart/GAMMA
 
 
 #### LED source selector
@@ -170,6 +179,8 @@ To be elaborated in the source code.
 - improve error handling
   - return values, where etc.
 - **setLEDSource(src0, src1, src2, src3)** one call
+- defines for sources
+- getAddress()
 
 #### Could
 
