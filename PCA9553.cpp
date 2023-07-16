@@ -136,7 +136,7 @@ bool PCA9553::setLEDSource(uint8_t led, uint8_t source)
 
   uint8_t val = source << (led * 2);
   uint8_t ledSelect = readReg(PCA9553_LS0);
-  ledSelect &= ~(0x03 << (led * 2))
+  ledSelect &= ~(0x03 << (led * 2));
   ledSelect |= val;
 
   writeReg(PCA9553_LS0, ledSelect);
