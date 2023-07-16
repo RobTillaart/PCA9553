@@ -14,6 +14,15 @@ Arduino library for PCA9553 I2C 8 bit PWM LED driver, 4 channel.
 ## Description
 
 This library is to control the I2C PCA9553 PWM extender.
+This device has two possible I2C addresses 0x62 and 0x63.
+If you want to connect more device to a single I2C bus you 
+need a I2C multiplexer like https://github.com/RobTillaart/TCA9548.
+
+There are two PWM generators 0 and 1, and one can set the duty cycle
+and the frequency by means of a prescaler. 
+
+Every output channel can select to which PWM generator it is connected,
+or if it is set to ON or OFF.
 
 
 #### Related
@@ -35,8 +44,8 @@ This library is to control the I2C PCA9553 PWM extender.
 
 - **PCA9553(uint8_t deviceAddress, TwoWire \*wire = &Wire)** Constructor with I2C device address,  Address = 0x62 or 0x63.
 and optional the Wire interface as parameter.
-- **bool begin()**
-initializes the library after startup.
+- **bool begin()** initializes the library after startup.
+Returns true if device address is available on I2C bus.
 - **bool begin(int sda, int scl)**
 idem, ESP32 ESP8266 only.
 - **bool isConnected()** checks if address is available on I2C bus.
@@ -66,10 +75,12 @@ idem, ESP32 ESP8266 only.
 
 #### ED source selector
 
-  bool     setLEDSource(uint8_t led, uint8_t source);
-  uint8_t  getLEDSource(uint8_t led);
-  
-  
+- **bool  setLEDSource(uint8_t led, uint8_t source)** set the source of the selected led.
+  - led == 0..3, source == 0..3, see table below
+- **uint8_t  getLEDSource(uint8_t led)** returns current setting,
+see table below.
+
+
 |  source  |  output              |
 |:--------:|:---------------------|
 |  00      |  is set LOW (LED on)
@@ -78,16 +89,18 @@ idem, ESP32 ESP8266 only.
 |  11      |  blinks at PWM1 rate
 
 
-
 #### Error codes
 
 to be elaborated.
 
 
-|  Error code         |  Value  |  Description           |
-|:--------------------|:-------:|:-----------------------|
-|  PCA9553_OK         |   0x00  |  Everything went well
-|  PCA9553_ERROR      |   0xFF  |  Generic error
+|  Error code             |  Value  |  Description           |
+|:------------------------|:-------:|:-----------------------|
+|  PCA9553_OK             |   0x00  |  Everything went well
+|  PCA9553_ERROR          |   0xFF  |  Generic error
+|  PCA9553_I2C_ERROR      |   0xFE  |
+|  PCA9553_CHANNEL_ERROR  |   0xFD  |
+|  PCA9553_SOURCE_ERROR   |   0xFC  |
 
 
 ## Future
@@ -97,17 +110,23 @@ to be elaborated.
 - improve documentation
 - test test test
 
+
 #### Should
 
-- default setup in begin
+- **reset()**
+- GPIO modi pins
+  - **pinMode()**
+  - **digitalWrite()**
+  - **digitalRead()**
 - improve error handling
   - return values, where etc.
+- **setLEDSource(src0, src1, src2, src3)** one call
 
-  
+
 #### Could
 
+- default setup in begin (what how)
 - alternative interface calls
-  - **setLEDSource(src0, src1, src2, src3)** one call
   - **setPWM(pwm0, pwm1)** one call
   - **setPrescaler(psc0, psc1)** one call
   - **configure(channel, psc0, pwm)**
@@ -115,7 +134,7 @@ to be elaborated.
   - **setPrescaler(channel, psc1)**
 - percent interface for PWM
 - time interface for prescaler
-
+- unit tests
 
 #### Wont
 
