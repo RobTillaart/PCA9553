@@ -48,40 +48,34 @@ unittest_teardown()
 
 unittest(test_constants)
 {
-  fprintf(stderr, "\nregisters");
-  // assertEqual(PCA963X_MODE1      , 0x00);
-  // assertEqual(PCA963X_MODE2      , 0x01);
+  intf(stderr, "\nregisters");
+  assertEqual(PCA9553_INPUT      , 0x00);
+  assertEqual(PCA9553_PSC0       , 0x01);
+  assertEqual(PCA9553_PWM0       , 0x02);
+  assertEqual(PCA9553_PSC1       , 0x03);
+  assertEqual(PCA9553_PWM1       , 0x04);
+  assertEqual(PCA9553_LS0        , 0x05);
 
-  // assertEqual(PCA963X_PWM(0)     , 0x82);
-  // assertEqual(PCA963X_PWM(1)     , 0x83);
-  // assertEqual(PCA963X_GRPPWM     , 0x12);
-  // assertEqual(PCA963X_GRPFREQ    , 0x13);
-  // assertEqual(PCA963X_LEDOUT_BASE, 0x14);
-
-  // assertEqual(PCA963X_LEDOFF     , 0x00);
-  // assertEqual(PCA963X_LEDON      , 0x01);
-  // assertEqual(PCA963X_LEDPWM     , 0x02);
-  // assertEqual(PCA963X_LEDGRPPWM  , 0x03);
-
-  // fprintf(stderr, "\nerrorcodes");
-  // assertEqual(PCA963X_OK         , 0x00);
-  // assertEqual(PCA963X_ERROR      , 0xFF);
-  // assertEqual(PCA963X_ERR_WRITE  , 0xFE);
-  // assertEqual(PCA963X_ERR_CHAN   , 0xFD);
-  // assertEqual(PCA963X_ERR_MODE   , 0xFC);
-  // assertEqual(PCA963X_ERR_REG    , 0xFB);
-  // assertEqual(PCA963X_ERR_I2C    , 0xFA);
+  fprintf(stderr, "\nerrorcodes");
+  assertEqual(PCA9553_OK         , 0x00);
+  assertEqual(PCA9553_ERROR      , 0xFF);
+  assertEqual(PCA9553_ERR_WRITE  , 0xFE);
+  assertEqual(PCA9553_ERR_CHAN   , 0xFD);
+  assertEqual(PCA9553_ERR_MODE   , 0xFC);
+  assertEqual(PCA9553_ERR_REG    , 0xFB);
+  assertEqual(PCA9553_ERR_I2C    , 0xFA);
 }
 
 
 unittest(test_constructor)
 {
-  // PCA9635 ledArray(0x20);
-  // assertTrue(ledArray.begin());
-  // assertTrue(ledArray.isConnected());
-  // assertEqual(16, ledArray.channelCount());
+  PCA9553 pca(0x62);
+
+  assertEqual(4, pca.channelCount);
 }
 
+//  need mock up for more tests.
+//  low prio.
 
 unittest_main()
 

@@ -29,10 +29,13 @@
 
 
 //  ERROR CODES
-//  TODO
 #define PCA9553_OK          0x00
 #define PCA9553_ERROR       0xFF
-
+#define PCA9553_ERR_WRITE   0xFE
+#define PCA9553_ERR_CHAN    0xFD
+#define PCA9553_ERR_MODE    0xFC
+#define PCA9553_ERR_REG     0xFB
+#define PCA9553_ERR_I2C     0xFA
 
 
 /////////////////////////////////////////////////////

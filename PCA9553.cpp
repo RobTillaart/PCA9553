@@ -53,16 +53,16 @@ bool PCA9553::isConnected()
 }
 
 
-/////////////////////////////////////////////////////
-//
-//
-//
 uint8_t PCA9553::channelCount()
 {
   return 4;
 }
 
 
+/////////////////////////////////////////////////////
+//
+//  GPIO
+//
 uint8_t PCA9553::getInput()
 {
   return readReg(PCA9553_INPUT);
@@ -129,32 +129,16 @@ uint8_t PCA9553::getPWM1()
 //
 //  LED SOURCE SELECTOR
 //
-bool  PCA9553::setLEDSource(uint8_t led, uint8_t source)
+bool PCA9553::setLEDSource(uint8_t led, uint8_t source)
 {
   if (led > 3) return false;
   if (source > 3) return false;
-  uint8_t val = source << (led * 2);
 
+  uint8_t val = source << (led * 2);
   uint8_t ledSelect = readReg(PCA9553_LS0);
-  switch (led)
-  {
-    case 3:
-      ledSelect &= 0x3F;
-      ledSelect |= val;
-      break;
-    case 2:
-      ledSelect &= 0xCF;
-      ledSelect |= val;
-      break;
-    case 1:
-      ledSelect &= 0xF3;
-      ledSelect |= val;
-      break;
-    case 0:
-      ledSelect &= 0xFC;
-      ledSelect |= val;
-      break;
-  }
+  ledSelect &= ~(0x03 << (led * 2))
+  ledSelect |= val;
+
   writeReg(PCA9553_LS0, ledSelect);
   return true;
 }
