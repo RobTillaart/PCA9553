@@ -71,7 +71,7 @@ unittest(test_constructor)
 {
   PCA9553 pca(0x62);
 
-  assertEqual(4, pca.channelCount);
+  assertEqual(4, pca.channelCount());
 }
 
 //  need mock up for more tests.
