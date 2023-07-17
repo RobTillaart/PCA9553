@@ -7,9 +7,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 
 ## [0.2.0] - 2023-07-17
-- refactor interface (vreaking)
+- refactor interface (breaking)
   - for compatibility with PCA9552, PCA9551
 - add **uint8_t getAddress()**
+- update readme.md
+- internal refactor
+
 
 ----
 

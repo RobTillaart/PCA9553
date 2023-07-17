@@ -62,7 +62,7 @@ uint8_t PCA9553::getAddress()
 
 uint8_t PCA9553::channelCount()
 {
-  return 4;
+  return _channelCount;
 }
 
 

@@ -23,17 +23,17 @@ void setup()
 
   if (leds.begin() == false)
   {
-    Serial.println("COuld not connect.");
+    Serial.println("Could not connect.");
     while(1);
   }
 
   //  default
-  leds.setPrescaler0(255);
-  leds.setPWM0(128);
+  leds.setPrescaler(0, 255);
+  leds.setPWM(0, 128);
 
   //  different
-  leds.setPrescaler1(113);
-  leds.setPWM1(32);
+  leds.setPrescaler(1, 113);
+  leds.setPWM(1, 32);
 
   //  all channels a different source
   leds.setLEDSource(0, 0);

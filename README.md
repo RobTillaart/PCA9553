@@ -13,7 +13,7 @@ Arduino library for PCA9553 I2C 8 bit PWM LED driver, 4 channel.
 
 ## Description
 
-This library is to control the I2C PCA9553 PWM extender.
+This experimental library is to control the I2C PCA9553 PWM extender.
 This device has two possible hardcoded I2C addresses 0x62 and 0x63, 
 see table below.
 If you need to connect more PCA9553 devices to a single I2C bus you 
@@ -86,6 +86,8 @@ Only the lower 4 bits are used.
 
 #### Prescalers Frequency
 
+Get and set the pre-scaler of the PWM generator.
+
 - **void setPrescaler(uint8_t gen, uint8_t psc = 255)** set pre-scaler for generator, default 255.
 - **uint8_t getPrescaler(uint8_t gen)** get the set value.
 
@@ -100,9 +102,9 @@ Some "magic" pre-scalers.  (to be confirmed).
 |  psc  |  period  |  frequency  |
 |:-----:|:--------:|:-----------:|
 |    0  |  0.0227  |  44.00 Hz   |
-|    1  |  0.0455  |  22.00 Hz   | 
-|    3  |  0.0909  |  11.00 Hz   | 
-|    7  |  0.1818  |   5.50 Hz   | 
+|    1  |  0.0455  |  22.00 Hz   |
+|    3  |  0.0909  |  11.00 Hz   |
+|    7  |  0.1818  |   5.50 Hz   |
 |   10  |  0.250   |   4.00 Hz   |
 |   21  |  0.500   |   2.00 Hz   |
 |   43  |  1.000   |   1.00 Hz   |
@@ -114,6 +116,8 @@ Some "magic" pre-scalers.  (to be confirmed).
 
 #### PWM
 
+Get and set the duty cycle of the PWM generator.
+
 - **void setPWM(uint8_t gen, uint8_t psc = 128)** set PWM for generator, default 128.
 - **uint8_t getPWM(uint8_t gen)** get the set value.
 
@@ -123,7 +127,7 @@ The duty cycle of ```BLINK = (256 - PWM) / 256```
 
 |  pwm  |  duty cycle  |
 |:-----:|:------------:|
-|    0  }     0%       |
+|    0  |     0%       |
 |   64  |    25%       |
 |  128  |    50%       |
 |  192  |    75%       |

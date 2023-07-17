@@ -28,7 +28,7 @@
 //  TODO
 
 
-//  ERROR CODES
+//  ERROR CODES (not all used yet)
 #define PCA9553_OK          0x00
 #define PCA9553_ERROR       0xFF
 #define PCA9553_ERR_WRITE   0xFE
@@ -53,7 +53,7 @@ public:
   bool     begin();
   bool     isConnected();
 
-  uint8_t  getAddress()
+  uint8_t  getAddress();
   uint8_t  channelCount();
 
   //  input register, only lower 4 bits
@@ -61,11 +61,11 @@ public:
 
 
   //  PRESCALERS
-  bool     setPrescaler(uint8_t gen, uint8_t psc = 255);
+  void     setPrescaler(uint8_t gen, uint8_t psc = 255);
   uint8_t  getPrescaler(uint8_t gen);
 
   //  PWM
-  bool     setPWM(uint8_t gen, uint8_t pwm = 128);
+  void     setPWM(uint8_t gen, uint8_t pwm = 128);
   uint8_t  getPWM(uint8_t gen);
 
 
@@ -88,6 +88,7 @@ private:
   uint8_t  _address;
   uint8_t  _channelCount;
   uint8_t  _error;
+
   TwoWire* _wire;
 };
 
