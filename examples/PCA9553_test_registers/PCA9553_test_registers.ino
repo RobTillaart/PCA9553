@@ -23,7 +23,7 @@ void test_GPIO()
     Serial.print("\t");
     Serial.print(leds.digitalRead(i));
     Serial.print("\t");
-    leds.digitalWrite(i, LOW);
+    leds.digitalWrite(i, HIGH);
     Serial.print(leds.digitalRead(i));
     Serial.print("\n");
   }
