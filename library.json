@@ -1,6 +1,6 @@
 {
   "name": "PCA9553",
-  "keywords": "I2C,PCA9635,PWM",
+  "keywords": "I2C,PCA9553,PWM",
   "description": "Arduino library for PCA9553 I2C LED driver, 4 channel",
   "authors":
   [

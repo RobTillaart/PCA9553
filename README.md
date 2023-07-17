@@ -78,13 +78,14 @@ idem, ESP32 ESP8266 only.
 - **uint8_t channelCount()** returns the number of channels = 4.
 
 
-#### Input
+#### GPIO
 
-- **getInput()** read current output levels.
-Only the lower 4 bits are used.
+- **uint8_t getInput()** read all current output levels.
+- **void digitalWrite(uint8_t led, uint8_t val)** set LED  pin HIGH or LOW.
+- **uint8_t digitalRead(uint8_t led)** read current state of LED pin.
 
 
-#### Prescalers Frequency
+#### Prescaler Frequency
 
 Get and set the pre-scaler of the PWM generator.
 
@@ -118,7 +119,8 @@ Some "magic" pre-scalers.  (to be confirmed).
 
 Get and set the duty cycle of the PWM generator.
 
-- **void setPWM(uint8_t gen, uint8_t psc = 128)** set PWM for generator, default 128.
+- **void setPWM(uint8_t gen, uint8_t psc = 128)** set PWM for generator, 
+default value = 128.
 - **uint8_t getPWM(uint8_t gen)** get the set value.
 
 gen = 0 or 1
@@ -182,10 +184,6 @@ To be elaborated in the source code.
 #### Should
 
 - **reset()**  power on reset...
-- GPIO modi pins
-  - **pinMode()**
-  - **digitalWrite()**
-  - **digitalRead()**
 - improve error handling
   - return values, where etc.
 - defines for sources
