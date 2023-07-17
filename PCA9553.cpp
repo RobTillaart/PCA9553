@@ -89,8 +89,8 @@ void PCA9553::setPrescaler(uint8_t gen, uint8_t psc)
 
 uint8_t PCA9553::getPrescaler(uint8_t gen)
 {
-  if (gen == 0) readReg(PCA9553_PSC0);
-  else          readReg(PCA9553_PSC1);
+  if (gen == 0) return readReg(PCA9553_PSC0);
+  else          return readReg(PCA9553_PSC1);
 }
 
 
@@ -107,8 +107,8 @@ void PCA9553::setPWM(uint8_t gen, uint8_t pwm)
 
 uint8_t PCA9553::getPWM(uint8_t gen)
 {
-  if (gen == 0) readReg(PCA9553_PWM0);
-  else          readReg(PCA9553_PWM1);
+  if (gen == 0) return readReg(PCA9553_PWM0);
+  else          return readReg(PCA9553_PWM1);
 }
 
 
