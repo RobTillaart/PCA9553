@@ -10,6 +10,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - refactor interface (breaking)
   - for compatibility with PCA9552, PCA9551
 - add **uint8_t getAddress()**
+- add **void digitalWrite(led, value)**
+- add **uint8_t digitalRead(led)**
 - update readme.md
 - internal refactor
 

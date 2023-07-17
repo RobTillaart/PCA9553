@@ -58,7 +58,8 @@ public:
 
   //  input register, only lower 4 bits
   uint8_t  getInput();
-
+  void     digitalWrite(uint8_t led, uint8_t val);
+  uint8_t  digitalRead(uint8_t led);
 
   //  PRESCALERS
   void     setPrescaler(uint8_t gen, uint8_t psc = 255);

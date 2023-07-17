@@ -76,6 +76,21 @@ uint8_t PCA9553::getInput()
 }
 
 
+void PCA9553::digitalWrite(uint8_t led, uint8_t val)
+{
+  if (val == LOW) setLEDSource(led, 0);
+  else            setLEDSource(led, 1);
+}
+
+
+uint8_t PCA9553::digitalRead(uint8_t led)
+{
+  uint8_t val = readReg(PCA9553_INPUT);
+  if ((val >> led) & 0x01) return HIGH;
+  return LOW;
+}
+
+
 /////////////////////////////////////////////////////
 //
 //  PRESCALERS
