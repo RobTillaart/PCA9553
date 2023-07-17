@@ -2,7 +2,7 @@
 //    FILE: PCA9553.cpp
 //  AUTHOR: Rob Tillaart
 //    DATE: 2023-07-16
-// VERSION: 0.1.0
+// VERSION: 0.2.0
 // PURPOSE: Arduino library for for I2C PCA9553 4 channel PWM
 //     URL: https://github.com/RobTillaart/PCA9553
 
@@ -18,6 +18,7 @@ PCA9553::PCA9553(const uint8_t deviceAddress, TwoWire *wire)
 {
   _address = deviceAddress;
   _wire    = wire;
+  _channelCount = 4;
 }
 
 
@@ -53,6 +54,12 @@ bool PCA9553::isConnected()
 }
 
 
+uint8_t PCA9553::getAddress()
+{
+  return _address;
+}
+
+
 uint8_t PCA9553::channelCount()
 {
   return 4;
@@ -73,27 +80,17 @@ uint8_t PCA9553::getInput()
 //
 //  PRESCALERS
 //
-void PCA9553::setPrescaler0(uint8_t psc)
+void PCA9553::setPrescaler(uint8_t gen, uint8_t psc)
 {
-  writeReg(PCA9553_PSC0, psc);
+  if (gen == 0) writeReg(PCA9553_PSC0, psc);
+  else          writeReg(PCA9553_PSC1, psc);
 }
 
 
-uint8_t PCA9553::getPrescaler0()
+uint8_t PCA9553::getPrescaler(uint8_t gen)
 {
-  return readReg(PCA9553_PSC0);
-}
-
-
-void PCA9553::setPrescaler1(uint8_t psc)
-{
-  writeReg(PCA9553_PSC1, psc);
-}
-
-
-uint8_t PCA9553::getPrescaler1()
-{
-  return readReg(PCA9553_PSC1);
+  if (gen == 0) readReg(PCA9553_PSC0);
+  else          readReg(PCA9553_PSC1);
 }
 
 
@@ -101,27 +98,17 @@ uint8_t PCA9553::getPrescaler1()
 //
 //  PWM
 //
-void PCA9553::setPWM0(uint8_t pwm)
+void PCA9553::setPWM(uint8_t gen, uint8_t pwm)
 {
-  writeReg(PCA9553_PWM0, pwm);
+  if (gen == 0) writeReg(PCA9553_PWM0, pwm);
+  else          writeReg(PCA9553_PWM1, pwm);
 }
 
 
-uint8_t PCA9553::getPWM0()
+uint8_t PCA9553::getPWM(uint8_t gen)
 {
-  return readReg(PCA9553_PWM0);
-}
-
-
-void PCA9553::setPWM1(uint8_t pwm)
-{
-  writeReg(PCA9553_PWM1, pwm);
-}
-
-
-uint8_t PCA9553::getPWM1()
-{
-  return readReg(PCA9553_PWM1);
+  if (gen == 0) readReg(PCA9553_PWM0);
+  else          readReg(PCA9553_PWM1);
 }
 
 
@@ -131,7 +118,7 @@ uint8_t PCA9553::getPWM1()
 //
 bool PCA9553::setLEDSource(uint8_t led, uint8_t source)
 {
-  if (led > 3) return false;
+  if (led >= _channelCount) return false;
   if (source > 3) return false;
 
   uint8_t val = source << (led * 2);
@@ -146,7 +133,7 @@ bool PCA9553::setLEDSource(uint8_t led, uint8_t source)
 
 uint8_t PCA9553::getLEDSource(uint8_t led)
 {
-  if (led > 3) return PCA9553_ERROR;
+  if (led >= _channelCount) return PCA9553_ERROR;
 
   uint8_t ledSelect = readReg(PCA9553_LS0);
   uint8_t source = (ledSelect >> (led * 2)) & 0x03;

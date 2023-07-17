@@ -6,6 +6,13 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 
+## [0.2.0] - 2023-07-17
+- refactor interface (vreaking)
+  - for compatibility with PCA9552, PCA9551
+- add **uint8_t getAddress()**
+
+----
+
 ## [0.1.0] - 2023-07-16
 - initial version
 

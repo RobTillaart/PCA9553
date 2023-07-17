@@ -53,6 +53,7 @@ public:
   bool     begin();
   bool     isConnected();
 
+  uint8_t  getAddress()
   uint8_t  channelCount();
 
   //  input register, only lower 4 bits
@@ -60,19 +61,12 @@ public:
 
 
   //  PRESCALERS
-  void     setPrescaler0(uint8_t psc = 255);
-  uint8_t  getPrescaler0();
-
-  void     setPrescaler1(uint8_t psc = 255);
-  uint8_t  getPrescaler1();
-
+  bool     setPrescaler(uint8_t gen, uint8_t psc = 255);
+  uint8_t  getPrescaler(uint8_t gen);
 
   //  PWM
-  void     setPWM0(uint8_t pwm = 128);
-  uint8_t  getPWM0();
-
-  void     setPWM1(uint8_t pwm = 128);
-  uint8_t  getPWM1();
+  bool     setPWM(uint8_t gen, uint8_t pwm = 128);
+  uint8_t  getPWM(uint8_t gen);
 
 
   //  LED SOURCE SELECTOR
@@ -92,6 +86,7 @@ private:
   uint8_t  readReg(uint8_t reg);
 
   uint8_t  _address;
+  uint8_t  _channelCount;
   uint8_t  _error;
   TwoWire* _wire;
 };

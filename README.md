@@ -47,10 +47,15 @@ all zeroes, causing the bits to be set HIGH (LED off).
 
 #### Related
 
-- https://github.com/RobTillaart/PCA9634 (8 channel)
-- https://github.com/RobTillaart/PCA9553 (16 channel)
-- https://github.com/RobTillaart/PCA9685_RT (16 channel)
+- https://github.com/RobTillaart/PCA9551  (8 channel)
+- https://github.com/RobTillaart/PCA9552  (16 channel)
 - https://github.com/RobTillaart/PCA9553  (4 channel)
+
+Follow up series
+- https://github.com/RobTillaart/PCA9634 (8 channel)
+- https://github.com/RobTillaart/PCA9635 (16 channel)
+- https://github.com/RobTillaart/PCA9685_RT (16 channel)
+
 
 
 ## Interface
@@ -69,6 +74,7 @@ Returns true if device address is available on I2C bus.
 - **bool begin(int sda, int scl)**
 idem, ESP32 ESP8266 only.
 - **bool isConnected()** checks if address is available on I2C bus.
+- **uint8_t getAddress()** returns I2C address.
 - **uint8_t channelCount()** returns the number of channels = 4.
 
 
@@ -80,10 +86,10 @@ Only the lower 4 bits are used.
 
 #### Prescalers Frequency
 
-- **void setPrescaler0(uint8_t psc = 255)** set prescaler 0, default 255.
-- **uint8_t getPrescaler0()** get set value.
-- **void setPrescaler1(uint8_t psc = 255)** set prescaler 1, default 255.
-- **uint8_t getPrescaler1()** get set value.
+- **void setPrescaler(uint8_t gen, uint8_t psc = 255)** set pre-scaler for generator, default 255.
+- **uint8_t getPrescaler(uint8_t gen)** get the set value.
+
+gen = 0 or 1
 
 The main oscillator frequency can be divided by a pre-scaler.
 The period of ```BLINK = (PSC + 1) / 44```
@@ -108,10 +114,10 @@ Some "magic" pre-scalers.  (to be confirmed).
 
 #### PWM
 
-- **void setPWM0(uint8_t pwm = 128)** set PWM0, default 128 == 50%.
-- **uint8_t getPWM0()** return set PWM.
-- **void setPWM1(uint8_t pwm = 128)** set PWM0, default 128 == 50%.
-- **uint8_t getPWM1()** return set PWM.
+- **void setPWM(uint8_t gen, uint8_t psc = 128)** set PWM for generator, default 128.
+- **uint8_t getPWM(uint8_t gen)** get the set value.
+
+gen = 0 or 1
 
 The duty cycle of ```BLINK = (256 - PWM) / 256```
 
@@ -178,9 +184,10 @@ To be elaborated in the source code.
   - **digitalRead()**
 - improve error handling
   - return values, where etc.
-- **setLEDSource(src0, src1, src2, src3)** one call
 - defines for sources
-- getAddress()
+- add examples
+  - gauss curve?
+  
 
 #### Could
 
@@ -190,9 +197,5 @@ To be elaborated in the source code.
 - percent interface for PWM
 - time interface for prescaler
 - default setup in begin (what how)
-- alternative interface calls
-  - **setPWM(pwm0, pwm1)**
-  - **setPrescaler(psc0, psc1)**
-  - **setChannel(channel, psc0, pwm)**
-  - **setPWM(channel, pwm);
-  - **setPrescaler(channel, psc1)**
+
+
