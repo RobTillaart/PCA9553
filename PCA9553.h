@@ -94,7 +94,7 @@ private:
   uint8_t  readReg(uint8_t reg);
 
   uint8_t  _address;
-  uint8_t  _outputCount;
+  uint8_t  _channelCount;
   uint8_t  _error;
 
   TwoWire* _wire;

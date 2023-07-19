@@ -82,9 +82,9 @@ idem, ESP32 ESP8266 only.
 #### GPIO
 
 - **uint8_t getInput()** read all current output levels.
-- **void pinMode(uint8_t led, uint8_t mode)** set LED pin to INPUT or OUTPUT.
-- **void digitalWrite(uint8_t led, uint8_t val)** set LED pin HIGH or LOW.
-- **uint8_t digitalRead(uint8_t led)** read current state of LED pin.
+- **void pinMode(uint8_t pin, uint8_t mode)** set output pin to INPUT or OUTPUT.
+- **void digitalWrite(uint8_t pin, uint8_t value)** set output pin HIGH or LOW.
+- **uint8_t digitalRead(uint8_t pin)** read current state of output pin.
 
 
 #### Prescaler Frequency
