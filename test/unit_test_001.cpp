@@ -72,6 +72,7 @@ unittest(test_constructor)
   PCA9553 pca(0x62);
 
   assertEqual(4, pca.outputCount());
+  assertEqual(0x62, pca.getAddress());
 }
 
 //  need mock up for more tests.

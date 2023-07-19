@@ -30,7 +30,7 @@ void setup()
     while (1);
   }
 
-  for (int pin = 0; pin < 4; pin++)
+  for (int pin = 0; pin < leds.outputCount(); pin++)
   {
     leds.pinMode(pin, INPUT);
   }
@@ -39,7 +39,7 @@ void setup()
 
 void loop()
 {
-  for (int pin = 0; pin < 4; pin++)
+  for (int pin = 0; pin < leds.outputCount(); pin++)
   {
     int x = leds.digitalRead(pin);
     Serial.print(x);

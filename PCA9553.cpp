@@ -62,11 +62,10 @@ uint8_t PCA9553::reset()
   setPrescaler(1, 0);   //  44 Hz
   setPWM(0, 128);       //  50%
   setPWM(1, 128);       //  50%
-  setOutputMode(0, 0);  //  LOW
-  setOutputMode(1, 0);  //  LOW
-  setOutputMode(2, 0);  //  LOW
-  setOutputMode(3, 0);  //  LOW
-
+  for (int pin = 0; pin < _outputCount; pin++)
+  {
+    setOutputMode(pin, 0);  //  LOW
+  }
   return PCA9553_OK;
 }
 
@@ -167,11 +166,12 @@ uint8_t PCA9553::setOutputMode(uint8_t pin, uint8_t mode)
     return _error;
   }
 
-  uint8_t ledSelect = readReg(PCA9553_LS0);
+  uint8_t reg = PCA9553_LS0;
+  uint8_t ledSelect = readReg(reg);
   ledSelect &= ~(0x03 << (pin * 2));
   ledSelect |= (mode << (pin * 2));
 
-  return writeReg(PCA9553_LS0, ledSelect);
+  return writeReg(reg, ledSelect);
 }
 
 
@@ -183,7 +183,8 @@ uint8_t PCA9553::getOutputMode(uint8_t pin)
     return _error;
   }
 
-  uint8_t ledSelect = readReg(PCA9553_LS0);
+  uint8_t reg = PCA9553_LS0;
+  uint8_t ledSelect = readReg(reg);
   uint8_t mode = (ledSelect >> (pin * 2)) & 0x03;
   return mode;
 }
