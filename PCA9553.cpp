@@ -19,6 +19,7 @@ PCA9553::PCA9553(const uint8_t deviceAddress, TwoWire *wire)
   _address = deviceAddress;
   _wire    = wire;
   _outputCount = 4;
+  _error = PCA9553_OK;
 }
 
 
@@ -155,8 +156,16 @@ uint8_t PCA9553::getPWM(uint8_t gen)
 //
 uint8_t PCA9553::setOutputMode(uint8_t pin, uint8_t mode)
 {
-  if (pin >= _outputCount) return PCA9553_ERR_CHAN;
-  if (mode > 3) return false;
+  if (pin >= _outputCount)
+  {
+    _error = PCA9553_ERR_CHAN;
+    return _error;
+  }
+  if (mode > 3)
+  {
+    _error = PCA9553_ERR_MODE;
+    return _error;
+  }
 
   uint8_t ledSelect = readReg(PCA9553_LS0);
   ledSelect &= ~(0x03 << (pin * 2));
@@ -168,12 +177,25 @@ uint8_t PCA9553::setOutputMode(uint8_t pin, uint8_t mode)
 
 uint8_t PCA9553::getOutputMode(uint8_t pin)
 {
-  if (pin >= _outputCount) return PCA9553_ERR_CHAN;
+  if (pin >= _outputCount)
+  {
+    _error = PCA9553_ERR_CHAN;
+    return _error;
+  }
 
   uint8_t ledSelect = readReg(PCA9553_LS0);
   uint8_t mode = (ledSelect >> (pin * 2)) & 0x03;
   return mode;
 }
+
+
+uint8_tPCA9553::getLastError()
+{
+  uint8_t e = _error;
+  _error = PCA9553_OK;
+  return e;
+}
+
 
 
 /////////////////////////////////////////////////////

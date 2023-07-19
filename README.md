@@ -102,7 +102,7 @@ This gives the output a blink range of 0.172 Hz to 44 Hz.
 
 Some "magic" pre-scalers.  (to be confirmed).
 
-|  psc  |  period  |  frequency  |
+|  psc  |  Period  |  Frequency  |
 |:-----:|:--------:|:-----------:|
 |    0  |  0.0227  |  44.00 Hz   |
 |    1  |  0.0455  |  22.00 Hz   |
@@ -129,7 +129,7 @@ gen = 0 or 1
 
 The duty cycle of ```BLINK = (256 - PWM) / 256```
 
-|  pwm  |  duty cycle  |
+|  pwm  |  Duty Cycle  |
 |:-----:|:------------:|
 |    0  |     0%       |
 |   64  |    25%       |
@@ -153,12 +153,22 @@ See table below.
   - returns mode, see table below.
   - returns error code if parameter is out of range. 
 
-|  define             |  value  |  output              |
-|:-------------------:|:-------:|:---------------------|
+|  Define             |  Value  |  Output pin          |
+|:--------------------|:-------:|:---------------------|
 |  PCA9553_MODE_LOW   |    0    |  is set LOW (LED on)
 |  PCA9553_MODE_HIGH  |    1    |  is set high-impedance (LED off; default)
 |  PCA9553_MODE_PWM0  |    2    |  blinks at PWM0 rate
 |  PCA9553_MODE_PWM1  |    3    |  blinks at PWM1 rate
+
+
+#### Power On Reset
+
+The PCA9553 will keep its settings as long as it is powered on. 
+This means it can start with an previous configuration when uploading 
+two different sketches short after each other.
+
+To handle this the library has a **reset()** function which sets
+the device in the Power On state.
 
 
 #### Error codes
@@ -175,23 +185,24 @@ These are kept similar to PCA9635 et al error codes.
 |  PCA9553_ERR_REG        |   0xFB  |
 |  PCA9553_ERR_I2C        |   0xFA  |
 
-To be elaborated in the source code.
-
 
 ## Future
 
 #### Must
 
 - improve documentation
-- test test test
+- test with hardware
 
 #### Should
 
 - improve error handling
   - return values, where etc.
+- test
+  - reset function
 
 
 #### Could
+
 
 #### Wont (on request)
 

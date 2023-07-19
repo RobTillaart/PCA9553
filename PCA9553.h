@@ -85,6 +85,9 @@ public:
   uint8_t  setOutputMode(uint8_t pin, uint8_t mode);
   uint8_t  getOutputMode(uint8_t pin);
 
+  //  ERROR
+  uint8_t  getLastError();
+
 
 private:
   uint8_t  writeReg(uint8_t reg, uint8_t value);
