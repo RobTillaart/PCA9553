@@ -189,7 +189,7 @@ uint8_t PCA9553::getOutputMode(uint8_t pin)
 }
 
 
-uint8_tPCA9553::getLastError()
+uint8_t PCA9553::getLastError()
 {
   uint8_t e = _error;
   _error = PCA9553_OK;
