@@ -12,7 +12,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - add **uint8_t getAddress()**
 - add **void digitalWrite(led, value)**
 - add **uint8_t digitalRead(led)**
-- add example
+- add **reset()**
+- rename setLEDSource to **setOutputMode()**
+- rename channelCount to **outputCount()**
+- add #defines for modi
+- add some error handling
+- add examples
 - update readme.md
 - internal refactor
 

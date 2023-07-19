@@ -16,7 +16,7 @@ PCA9553 leds(0x62);
 void test_GPIO()
 {
   Serial.println(__FUNCTION__);
-  for (int i = 0; i < leds.channelCount(); i++)
+  for (int i = 0; i < leds.outputCount(); i++)
   {
     leds.digitalWrite(i, LOW);
     Serial.print(i);
@@ -67,18 +67,18 @@ void test_source()
   Serial.println(__FUNCTION__);
   for (uint8_t val = 0; val < 4; val++)
   {
-    leds.setLEDSource(0, val);
-    leds.setLEDSource(1, val);
-    leds.setLEDSource(2, val);
-    leds.setLEDSource(3, val);
+    leds.setOutputMode(0, val);
+    leds.setOutputMode(1, val);
+    leds.setOutputMode(2, val);
+    leds.setOutputMode(3, val);
 
-    Serial.print(leds.getLEDSource(0));
+    Serial.print(leds.getOutputMode(0));
     Serial.print("\t");
-    Serial.print(leds.getLEDSource(1));
+    Serial.print(leds.getOutputMode(1));
     Serial.print("\t");
-    Serial.print(leds.getLEDSource(2));
+    Serial.print(leds.getOutputMode(2));
     Serial.print("\t");
-    Serial.print(leds.getLEDSource(3));
+    Serial.print(leds.getOutputMode(3));
     Serial.print("\n");
   }
   Serial.println();
@@ -99,7 +99,7 @@ void setup()
   }
 
   Serial.println(leds.getAddress(), HEX);
-  Serial.println(leds.channelCount());
+  Serial.println(leds.outputCount());
   Serial.println();
   
   test_GPIO();

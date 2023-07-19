@@ -30,12 +30,8 @@ void setup()
     while(1);
   }
 
-  //  not mandatory, just to make it explicit
-  leds.pinMode(0, OUTPUT);
-  leds.pinMode(1, OUTPUT);
-
-  leds.setLEDSource(0, 2);
-  leds.setLEDSource(1, 3);
+  leds.setOutputMode(0, PCA9553_MODE_PWM0);
+  leds.setOutputMode(1, PCA9553_MODE_PWM1);
 
   leds.setPrescaler(0, 43);  //  1 Hz
   leds.setPWM(0, 128);       //  50% duty cycle
