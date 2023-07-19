@@ -34,6 +34,9 @@ void setup()
   leds.pinMode(0, OUTPUT);
   leds.pinMode(1, OUTPUT);
 
+  leds.setLEDSource(0, 2);
+  leds.setLEDSource(1, 3);
+
   leds.setPrescaler(0, 43);  //  1 Hz
   leds.setPWM(0, 128);       //  50% duty cycle
   leds.setPrescaler(1, 21);  //  2 Hz
