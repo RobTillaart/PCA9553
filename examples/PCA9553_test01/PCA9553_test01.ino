@@ -15,6 +15,7 @@ PCA9553 leds(0x62);
 
 
 void setup()
+{
   Serial.begin(115200);
   Serial.println(__FILE__);
   Serial.print("PCA9553_LIB_VERSION: ");
