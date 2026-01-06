@@ -16,7 +16,9 @@ Arduino library for PCA9553 I2C 8 bit PWM LED driver, 4 channel.
 
 ## Description
 
-This experimental library is to control the I2C PCA9553 PWM extender.
+**Experimental**
+
+This Arduino library is to control the I2C PCA9553 PWM extender.
 This device has two possible hardcoded I2C addresses 0x62 and 0x63, 
 see table below.
 If you need to connect more PCA9553 devices to a single I2C bus you 
